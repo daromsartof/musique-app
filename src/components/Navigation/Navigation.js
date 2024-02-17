@@ -9,6 +9,7 @@ import Favorite from '../../screens/Favorite/Favorite';
 import {NavigationContainer} from '@react-navigation/native';
 import {colors} from '../../services/constant';
 import {StyleSheet} from 'react-native';
+import HeaderComponent from '../HomeHeader/HeaderMusic';
 
 const Tab = createBottomTabNavigator();
 
@@ -18,6 +19,7 @@ function TabNavigation() {
       initialRouteName="Home"
       screenOptions={{
         tabBarShowLabel: false,
+        headerShown: false,
         tabBarActiveTintColor: colors.ACTIVE,
         tabBarStyle: {
           backgroundColor: colors.SECONDARY,
@@ -53,6 +55,8 @@ function TabNavigation() {
         component={Music}
         options={{
           tabBarLabel: 'Musci',
+          headerShown: true,
+          header: props => <HeaderComponent {...props} />,
           // eslint-disable-next-line react/no-unstable-nested-components
           tabBarIcon: ({color, size}) => (
             <MaterialCommunityIcons name="music" color={color} size={40} />
