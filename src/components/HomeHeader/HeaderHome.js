@@ -1,11 +1,12 @@
 import React from 'react';
-import {Avatar, Text} from '@rneui/themed';
+import {Avatar, Header, Text} from '@rneui/themed';
 import {StyleSheet, View} from 'react-native';
 import TextComponent from '../Text/Text';
+import HeaderContainer from './HeaderContainer';
 
 function HomeHeader({image_url}) {
   return (
-    <View style={styles.container}>
+    <HeaderContainer style={styles.container}>
       <View>
         <Avatar size={40} rounded source={{uri: image_url}} />
       </View>
@@ -13,7 +14,7 @@ function HomeHeader({image_url}) {
         <TextComponent style={styles.title}>Sarwar Jahan</TextComponent>
         <TextComponent style={styles.subTitle}>Gold Member</TextComponent>
       </View>
-    </View>
+    </HeaderContainer>
   );
 }
 

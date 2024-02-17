@@ -1,13 +1,28 @@
 /* eslint-disable react-native/no-inline-styles */
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import {colors} from '../../services/constant';
-import HomeHeader from '../../components/HomeHedear/HomeHeader';
+import HomeHeader from '../../components/HomeHeader/HeaderHome';
 import TextComponent from '../../components/Text/Text';
-import {Input} from '@rneui/themed';
+import {Input, Text} from '@rneui/themed';
+import * as RNFS from 'react-native-fs';
 
 function Home() {
+  const [folders, setFolders] = useState([]);
+  const getListDirectory = () => {
+    console.log(RNFS.ExternalStorageDirectoryPath);
+    RNFS.readDir(RNFS.ExternalStorageDirectoryPath).then(res => {
+      setFolders(res.filter(item => item.isDirectory()));
+    });
+  };
+
+  useEffect(() => {
+    getListDirectory();
+
+    return () => {};
+  }, []);
+
   return (
     <ScrollView
       style={{
@@ -36,6 +51,11 @@ function Home() {
             <Input />
           </View>
         </View>
+      </View>
+      <View>
+        {folders.map((folder, i) => (
+          <Text key={i}>{folder.name}</Text>
+        ))}
       </View>
     </ScrollView>
   );
