@@ -4,4 +4,12 @@ const colors = {
   SECONDARY: '#0A091E',
 };
 
-export {colors};
+const QUERY = {
+  create_table_favorite: `CREATE TABLE favorite (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    music_id INTEGER,
+    created_at TEXT
+  );  
+  `,
+};
+export {colors, QUERY};
