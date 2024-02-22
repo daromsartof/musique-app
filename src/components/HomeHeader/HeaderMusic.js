@@ -1,4 +1,3 @@
-import {Header} from '@rneui/themed';
 import React, {useEffect, useState} from 'react';
 import TextComponent from '../Text/Text';
 import {colors} from '../../services/constant';

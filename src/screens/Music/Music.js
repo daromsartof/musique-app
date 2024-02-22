@@ -16,49 +16,6 @@ import TextComponent from '../../components/Text/Text';
 import ProgressBar from '../../components/Progress/ProgressBar';
 import Controls from '../../components/Controls/Controls';
 
-const TrackProgress = () => {
-  const { position, duration } = useProgress(200);
-
-  function format(seconds) {
-    let mins = (parseInt(seconds / 60, 10)).toString().padStart(2, '0');
-    let secs = (Math.trunc(seconds) % 60).toString().padStart(2, '0');
-    return `${mins}:${secs}`;
-  }
-
-  return (
-    <View>
-      <Text style={styles.trackProgress}>
-        {format(position)} / {format(duration)}
-      </Text>
-    </View>
-  );
-};
-
-const Header = () => {
-  const [info, setInfo] = useState({});
-  useEffect(() => {
-    setTrackInfo();
-  }, []);
-
-  useTrackPlayerEvents([Event.PlaybackTrackChanged], (event) => {
-    if (event.state === State.nextTrack) {
-      setTrackInfo();
-    }
-  });
-
-  async function setTrackInfo() {
-    const track = await TrackPlayer.getCurrentTrack();
-    setInfo(await TrackPlayer.getTrack(track));
-  }
-
-  return (
-    <View>
-      <Text style={styles.songTitle}>{info.title}</Text>
-      <Text style={styles.artistName}>{info.artist}</Text>
-    </View>
-  );
-};
-
 const PlaylistItem = ({ index, title, isCurrent }) => {
 
   const handleItemPress = () => {
@@ -148,7 +105,7 @@ function Music() {
         </Card>
       </View>
       <Card
-          containerStyle={styles.cardContainer}
+          containerStyle={[styles.titleContainer]}
       >
         <TextComponent style={styles.author}>{info.artist}</TextComponent>
         <TextComponent style={styles.subTitle}>{info.title}</TextComponent>
@@ -172,19 +129,26 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     borderColor: 'transparent',
     overflow: 'hidden',
-   backgroundColor: '#112',
-
+    backgroundColor: '#112',
+  },
+  titleContainer:{
+    padding: 0,
+    borderColor: 'transparent',
+    overflow: 'hidden',
+    backgroundColor: '#112',
   },
   author: {
     fontSize: 24,
     textAlign: 'center',
     marginVertical: 10,
+    maxHeight: 70
   },
   subTitle: {
     fontSize: 18,
     color: '#8E8E8E',
     textAlign: 'center',
     marginVertical: 10,
+    maxHeight: 80
   },
 });
 

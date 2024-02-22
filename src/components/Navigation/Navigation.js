@@ -1,7 +1,5 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import Home from '../../screens/Home/Home';
 import Music from '../../screens/Music/Music';
@@ -9,14 +7,20 @@ import Favorite from '../../screens/Favorite/Favorite';
 import {NavigationContainer} from '@react-navigation/native';
 import {colors} from '../../services/constant';
 import {StyleSheet} from 'react-native';
-import HeaderComponent from '../HomeHeader/HeaderMusic';
+import {
+  FavoriteIconBarItem,
+  HomeIconItem,
+  MusicIconBarItem,
+  MusicNavItem,
+} from './__parcial__/NavigationParcialUI';
+import HeaderFavorite from '../HomeHeader/HeaderFavorite';
 
 const Tab = createBottomTabNavigator();
 
 function TabNavigation() {
   return (
     <Tab.Navigator
-      initialRouteName="Home"
+      initialRouteName="Music"
       screenOptions={{
         tabBarShowLabel: false,
         headerShown: false,
@@ -44,10 +48,8 @@ function TabNavigation() {
           tabBarIconStyle: {
             backgroundColor: 'red',
           },
-          // eslint-disable-next-line react/no-unstable-nested-components
-          tabBarIcon: ({color, size}) => (
-            <Ionicons name="home-outline" color={color} size={40} />
-          ),
+
+          tabBarIcon: HomeIconItem,
         }}
       />
       <Tab.Screen
@@ -56,11 +58,8 @@ function TabNavigation() {
         options={{
           tabBarLabel: 'Musci',
           headerShown: true,
-          header: props => <HeaderComponent {...props} />,
-          // eslint-disable-next-line react/no-unstable-nested-components
-          tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons name="music" color={color} size={40} />
-          ),
+          header: MusicNavItem,
+          tabBarIcon: MusicIconBarItem,
         }}
       />
       <Tab.Screen
@@ -68,14 +67,9 @@ function TabNavigation() {
         component={Favorite}
         options={{
           tabBarLabel: 'Favorite',
-          // eslint-disable-next-line react/no-unstable-nested-components
-          tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons
-              name="cards-heart-outline"
-              color={color}
-              size={40}
-            />
-          ),
+          headerShown: true,
+          header: HeaderFavorite,
+          tabBarIcon: FavoriteIconBarItem,
         }}
       />
     </Tab.Navigator>

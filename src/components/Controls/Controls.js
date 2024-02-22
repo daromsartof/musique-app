@@ -80,10 +80,10 @@ const styles = StyleSheet.create({
   },
   containerLeftRight: {
     flexDirection: 'row',
-    alignItems: 'center', 
+    alignItems: 'center',
     justifyContent: 'space-around',
     flex: 1,
-  }
+  },
 });
 
 export default Controls;
