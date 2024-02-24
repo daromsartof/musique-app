@@ -1,5 +1,5 @@
 import {Avatar, Card, Image, ListItem, Text} from '@rneui/themed';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -9,9 +9,30 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import TextComponent from '../../components/Text/Text';
+import TextComponent from '../../components/UI/Text/Text';
 import {Heart} from '../../components/HomeHeader/__parcial__/HeaderUI';
-function Favorite() {
+import EntityManager from '../../services/EntityManager';
+import FAVORITE from '../../models/favorite.model';
+function Favorite({route}) {
+  const [musicFavorites, setMusicFavorites] = useState([]);
+
+  const getAllMusicFavorite = async () => {
+    try {
+      const res = await EntityManager.select(FAVORITE.tableName);
+      setMusicFavorites(res);
+    } catch (error) {
+      setMusicFavorites([]);
+    }
+  };
+
+  useEffect(() => {
+    console.log('here');
+    getAllMusicFavorite();
+
+    return () => {
+      setMusicFavorites([]);
+    };
+  }, [route.key]);
   return (
     <SafeAreaView style={styles.container}>
       <View>
@@ -57,44 +78,7 @@ function Favorite() {
         </TextComponent>
         <View>
           <FlatList
-            data={[
-              {
-                title: 'hello',
-                subtitle: 'sdfsfsd',
-              },
-              {
-                title: 'hello',
-                subtitle: 'dgsdfds sd ',
-              },
-              {
-                title: 'hello',
-                subtitle: 'sdfs sfsd',
-              },
-              {
-                title: 'hello',
-                subtitle: 'sdfsfsd',
-              },
-              {
-                title: 'hello',
-                subtitle: 'dgsdfds sd ',
-              },
-              {
-                title: 'hello',
-                subtitle: 'sdfs sfsd',
-              },
-              {
-                title: 'hello',
-                subtitle: 'sdfsfsd',
-              },
-              {
-                title: 'hello',
-                subtitle: 'dgsdfds sd ',
-              },
-              {
-                title: 'hello',
-                subtitle: 'sdfs sfsd',
-              },
-            ]}
+            data={musicFavorites}
             style={{height: 500}}
             showsVerticalScrollIndicator={false}
             renderItem={({item, index}) => (
@@ -106,10 +90,10 @@ function Favorite() {
                 <Avatar source={{uri: 'https://picsum.photos/200/600'}} />
                 <ListItem.Content>
                   <ListItem.Title>
-                    <TextComponent>{item.title}</TextComponent>
+                    <TextComponent>{item.artist}</TextComponent>
                   </ListItem.Title>
                   <ListItem.Subtitle>
-                    <TextComponent>{item.subtitle}</TextComponent>
+                    <TextComponent>{item.title}</TextComponent>
                   </ListItem.Subtitle>
                 </ListItem.Content>
                 <Pressable>

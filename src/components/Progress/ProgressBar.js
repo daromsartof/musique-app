@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {useProgress} from 'react-native-track-player';
-import TextComponent from '../Text/Text';
+import TextComponent from '../UI/Text/Text';
 import {colors} from '../../services/constant';
 
 const ProgressBar = () => {

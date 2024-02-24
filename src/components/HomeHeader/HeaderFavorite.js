@@ -1,5 +1,5 @@
 import React from 'react';
-import TextComponent from '../Text/Text';
+import TextComponent from '../UI/Text/Text';
 import {colors} from '../../services/constant';
 import {Pressable, StyleSheet} from 'react-native';
 import HeaderContainer from './HeaderContainer';

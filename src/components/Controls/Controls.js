@@ -4,7 +4,7 @@ import TrackPlayer, {State, usePlaybackState} from 'react-native-track-player';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import {colors} from '../../services/constant';
-import TextComponent from '../Text/Text';
+import TextComponent from '../UI/Text/Text';
 const Controls = ({onShuffle}) => {
   const playerState = usePlaybackState();
 

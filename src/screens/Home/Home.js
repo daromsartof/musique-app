@@ -4,7 +4,7 @@ import React, {useEffect, useState} from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import {colors} from '../../services/constant';
 import HomeHeader from '../../components/HomeHeader/HeaderHome';
-import TextComponent from '../../components/Text/Text';
+import TextComponent from '../../components/UI/Text/Text';
 import {Input, Text} from '@rneui/themed';
 import * as RNFS from 'react-native-fs';
 

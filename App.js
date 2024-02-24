@@ -2,21 +2,22 @@ import React, {useEffect, useState} from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import Navigation from './src/components/Navigation/Navigation';
 import {colors} from './src/services/constant';
-import PlayerServices from './src/services/PlayerServices';
+import {addTracks, setupPlayer} from './src/services/playerServices';
 import TrackPlayer from 'react-native-track-player';
 import {ActivityIndicator, NativeModules, StyleSheet} from 'react-native';
 import {SafeAreaView} from 'react-native';
 import db from './src/services/EntityManager';
+import FAVORITE from './src/models/favorite.model';
 const {MusicModul} = NativeModules;
 function App() {
   // console.log(db);
   const [isPlayerReady, setIsPlayerReady] = useState(false);
   const setup = async tracks => {
-    let isSetup = await PlayerServices.setupPlayer();
+    let isSetup = await setupPlayer();
 
     const queue = await TrackPlayer.getQueue();
     if (isSetup && queue.length <= 0) {
-      await PlayerServices.addTracks(tracks);
+      await addTracks(tracks);
     }
 
     setIsPlayerReady(isSetup);
@@ -52,17 +53,8 @@ function App() {
 
   const createTable = async () => {
     db.createTable(
-      'favorite',
-      [
-        {
-          name: 'music_id',
-          type: 'INTEGER',
-        },
-        {
-          name: 'created_at',
-          type: 'TEXT',
-        },
-      ],
+      FAVORITE.tableName,
+      FAVORITE.fields,
       console.log,
       console.log,
     );

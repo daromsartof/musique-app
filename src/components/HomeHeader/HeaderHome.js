@@ -1,7 +1,7 @@
 import React from 'react';
 import {Avatar, Header, Text} from '@rneui/themed';
 import {StyleSheet, View} from 'react-native';
-import TextComponent from '../Text/Text';
+import TextComponent from '../UI/Text/Text';
 import HeaderContainer from './HeaderContainer';
 
 function HomeHeader({image_url}) {

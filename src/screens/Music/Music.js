@@ -12,7 +12,7 @@ import TrackPlayer, {
 } from 'react-native-track-player';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import HeaderComponent from '../../components/HomeHeader/HeaderMusic';
-import TextComponent from '../../components/Text/Text';
+import TextComponent from '../../components/UI/Text/Text';
 import ProgressBar from '../../components/Progress/ProgressBar';
 import Controls from '../../components/Controls/Controls';
 
